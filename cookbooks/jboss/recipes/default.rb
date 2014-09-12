@@ -31,6 +31,7 @@ jboss_home = "#{node['jboss']['jboss_home']}/jboss"
 
 execute "chown /opt/jboss" do
 	command "chown -RL #{node['jboss']['jboss_user']}.#{node['jboss']['jboss_user']} #{jboss_home}"
+	#not_if { ::File.
 end
 
 cookbook_file "jboss-as-standalone.sh" do
@@ -40,8 +41,14 @@ cookbook_file "jboss-as-standalone.sh" do
 	mode "0755"
 end
 
-cookbook_file "jboss-as.conf" do
-	path "/etc/jboss-as/jboss-as.conf"
+template "/etc/jboss-as/jboss-as.conf" do
+	source "jboss-as.conf.erb"
 	owner "root"
 	group "root"
+	variables({
+     :jboss_user => node['jboss']['jboss_user'],
+     :jboss_home => jboss_home
+     })
 end
+
+include_recipe 'jboss::deploy'
