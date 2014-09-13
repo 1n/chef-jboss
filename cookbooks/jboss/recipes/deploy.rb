@@ -9,10 +9,12 @@
 
 remote_file "#{node['jboss']['sample_app']}" do
 	source "#{node['jboss']['sample_app_url']}"
+	owner "#{node['jboss']['jboss_user']}"
+	group "#{node['jboss']['jboss_user']}"
 end
 
-deploymentdir = "#{jboss_home}/standalone//deployments"
-
 execute "unzip" do
-	command "unzip #{node['jboss']['sample_app']} -d #{deploymentdir}"
+	command "unzip -u #{node['jboss']['sample_app']} -d #{node['jboss']['deployment_dir']}"
+	user "#{node['jboss']['jboss_user']}"
+	notifies :restart, "service[jboss]"
 end
