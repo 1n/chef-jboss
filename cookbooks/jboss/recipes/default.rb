@@ -14,9 +14,9 @@ remote_file "#{node['jboss']['jboss_package']}" do
 	checksum "0aece7899b54"
 end
 
-yum_package "unzip"
+package "unzip"
 
-execute "unzip" do
+unzip = execute "unzip" do
 	command "unzip #{node['jboss']['jboss_package']} -d #{node['jboss']['jboss_home']}"
 	not_if { ::File.exists?("#{node['jboss']['jboss_home']}/jboss-as-7.1.1.Final")}
 end
@@ -29,11 +29,9 @@ link "/opt/jboss" do
 	group "#{node['jboss']['jboss_user']}"
 end
 
-#jboss_home = "#{node['jboss']['jboss_home']}/jboss"
-
 execute "chown /opt/jboss" do
 	command "chown -RL #{node['jboss']['jboss_user']}.#{node['jboss']['jboss_user']} #{node['jboss']['jboss_home_link']}"
-	#not_if { ::File.
+	only_if { unzip.updated_by_last_action? }
 end
 
 cookbook_file "jboss-as-standalone.sh" do
@@ -60,8 +58,14 @@ template "#{node['jboss']['jboss_home_link']}/standalone/configuration/standalon
 	owner "#{node['jboss']['jboss_user']}"
 	group "#{node['jboss']['jboss_user']}"
 	variables({
-     :jboss_ip => node['jboss']['public_ip']
+	  :jboss_ip => node[:network][:interfaces][:eth1][:addresses].detect{|k,v| v[:family] == "inet" }.first
+     #:jboss_ip => node['jboss']['public_ip']
      })
+end
+
+service "jboss" do
+  supports :status => true, :restart => true, :reload => true
+  action   :enable
 end
 
 include_recipe 'jboss::start'

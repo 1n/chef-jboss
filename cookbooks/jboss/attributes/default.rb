@@ -3,8 +3,6 @@ default['jboss']['jboss_url'] = "http://download.jboss.org/jbossas/7.1/jboss-as-
 default['jboss']['jboss_home'] = "/opt"
 default['jboss']['jboss_home_link'] = "/opt/jboss"
 default['jboss']['jboss_user'] = "jboss-as"
-default['jboss']['public_ip'] = "192.168.100.10"
 default['jboss']['sample_app'] = "/tmp/testweb.zip"
 default['jboss']['sample_app_url'] = "http://www.cumulogic.com/download/Apps/testweb.zip"
 default['jboss']['deployment_dir'] = "#{default['jboss']['jboss_home_link']}/standalone/deployments"
-#$(ifconfig eth0 | grep "inet addr" | awk '{print $2}' | awk -F: '{print $2}')
