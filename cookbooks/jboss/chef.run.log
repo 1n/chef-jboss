@@ -100,3 +100,104 @@ To check your SSL configuration, or troubleshoot errors, you can use the
 [2014-09-14T19:29:11+00:00] INFO: Chef Run complete in 66.193145298 seconds
 [2014-09-14T19:29:11+00:00] INFO: Running report handlers
 [2014-09-14T19:29:11+00:00] INFO: Report handlers complete
+[2014-09-14T19:57:13+00:00] INFO: Forking chef instance to converge...
+[2014-09-14T19:57:13+00:00] WARN: 
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+SSL validation of HTTPS requests is disabled. HTTPS connections are still
+encrypted, but chef is not able to detect forged replies or man in the middle
+attacks.
+
+To fix this issue add an entry like this to your configuration file:
+
+```
+  # Verify all HTTPS connections (recommended)
+  ssl_verify_mode :verify_peer
+
+  # OR, Verify only connections to chef-server
+  verify_api_cert true
+```
+
+To check your SSL configuration, or troubleshoot errors, you can use the
+`knife ssl check` command like so:
+
+```
+  knife ssl check -c /root/.chef/solo.rb
+```
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+[2014-09-14T19:57:13+00:00] INFO: *** Chef 11.16.0 ***
+[2014-09-14T19:57:13+00:00] INFO: Chef-client pid: 2817
+[2014-09-14T19:57:15+00:00] INFO: Setting the run_list to ["recipe[jboss::default]"] from CLI options
+[2014-09-14T19:57:15+00:00] INFO: Run List is [recipe[jboss::default]]
+[2014-09-14T19:57:15+00:00] INFO: Run List expands to [jboss::default]
+[2014-09-14T19:57:15+00:00] INFO: Starting Chef Run for chef-cent-1
+[2014-09-14T19:57:15+00:00] INFO: Running start handlers
+[2014-09-14T19:57:15+00:00] INFO: Start handlers complete.
+[2014-09-14T19:57:15+00:00] WARN: Cloning resource attributes for service[jboss] from prior resource (CHEF-3694)
+[2014-09-14T19:57:15+00:00] WARN: Previous service[jboss]: /root/chef-jboss/cookbooks/jboss/recipes/default.rb:66:in `from_file'
+[2014-09-14T19:57:15+00:00] WARN: Current  service[jboss]: /root/chef-jboss/cookbooks/jboss/recipes/start.rb:1:in `from_file'
+[2014-09-14T19:57:15+00:00] WARN: Cloning resource attributes for execute[unzip] from prior resource (CHEF-3694)
+[2014-09-14T19:57:15+00:00] WARN: Previous execute[unzip]: /root/chef-jboss/cookbooks/jboss/recipes/default.rb:19:in `from_file'
+[2014-09-14T19:57:15+00:00] WARN: Current  execute[unzip]: /root/chef-jboss/cookbooks/jboss/recipes/deploy.rb:16:in `from_file'
+[2014-09-14T19:57:15+00:00] INFO: Processing package[java-1.6.0-openjdk] action install (java::openjdk line 46)
+[2014-09-14T19:57:16+00:00] INFO: package[java-1.6.0-openjdk] installing java-1.6.0-openjdk-1.6.0.0-7.1.13.4.el6_5 from updates repository
+[2014-09-14T19:57:30+00:00] INFO: Processing package[java-1.6.0-openjdk-devel] action install (java::openjdk line 46)
+[2014-09-14T19:57:31+00:00] INFO: package[java-1.6.0-openjdk-devel] installing java-1.6.0-openjdk-devel-1.6.0.0-7.1.13.4.el6_5 from updates repository
+[2014-09-14T19:57:34+00:00] INFO: Processing java_alternatives[set-java-alternatives] action set (java::openjdk line 52)
+[2014-09-14T19:57:43+00:00] INFO: Processing ruby_block[set-env-java-home] action run (java::set_java_home line 19)
+[2014-09-14T19:57:43+00:00] INFO: ruby_block[set-env-java-home] called
+[2014-09-14T19:57:43+00:00] INFO: Processing directory[/etc/profile.d] action create (java::set_java_home line 26)
+[2014-09-14T19:57:43+00:00] INFO: Processing file[/etc/profile.d/jdk.sh] action create (java::set_java_home line 30)
+[2014-09-14T19:57:43+00:00] INFO: file[/etc/profile.d/jdk.sh] created file /etc/profile.d/jdk.sh
+[2014-09-14T19:57:43+00:00] INFO: file[/etc/profile.d/jdk.sh] updated file contents /etc/profile.d/jdk.sh
+[2014-09-14T19:57:43+00:00] INFO: file[/etc/profile.d/jdk.sh] mode changed to 755
+[2014-09-14T19:57:43+00:00] INFO: Processing remote_file[/tmp/jboss.zip] action create (jboss::default line 12)
+[2014-09-14T19:57:43+00:00] INFO: remote_file[/tmp/jboss.zip] created file /tmp/jboss.zip
+[2014-09-14T19:58:05+00:00] INFO: remote_file[/tmp/jboss.zip] updated file contents /tmp/jboss.zip
+[2014-09-14T19:58:06+00:00] INFO: Processing package[unzip] action install (jboss::default line 17)
+[2014-09-14T19:58:07+00:00] INFO: package[unzip] installing unzip-6.0-1.el6 from base repository
+[2014-09-14T19:58:07+00:00] INFO: Processing execute[unzip] action run (jboss::default line 19)
+[2014-09-14T19:58:09+00:00] INFO: execute[unzip] ran successfully
+[2014-09-14T19:58:09+00:00] INFO: Processing user[jboss-as] action create (jboss::default line 24)
+[2014-09-14T19:58:09+00:00] INFO: user[jboss-as] created
+[2014-09-14T19:58:09+00:00] INFO: Processing link[/opt/jboss] action create (jboss::default line 26)
+[2014-09-14T19:58:09+00:00] INFO: link[/opt/jboss] created
+[2014-09-14T19:58:09+00:00] INFO: link[/opt/jboss] owner changed to 501
+[2014-09-14T19:58:09+00:00] INFO: link[/opt/jboss] group changed to 501
+[2014-09-14T19:58:09+00:00] INFO: Processing execute[chown /opt/jboss] action run (jboss::default line 32)
+[2014-09-14T19:58:09+00:00] INFO: execute[chown /opt/jboss] ran successfully
+[2014-09-14T19:58:09+00:00] INFO: Processing cookbook_file[jboss-as-standalone.sh] action create (jboss::default line 37)
+[2014-09-14T19:58:09+00:00] INFO: cookbook_file[jboss-as-standalone.sh] created file /etc/init.d/jboss
+[2014-09-14T19:58:09+00:00] INFO: cookbook_file[jboss-as-standalone.sh] updated file contents /etc/init.d/jboss
+[2014-09-14T19:58:09+00:00] INFO: cookbook_file[jboss-as-standalone.sh] owner changed to 0
+[2014-09-14T19:58:09+00:00] INFO: cookbook_file[jboss-as-standalone.sh] group changed to 0
+[2014-09-14T19:58:09+00:00] INFO: cookbook_file[jboss-as-standalone.sh] mode changed to 755
+[2014-09-14T19:58:09+00:00] INFO: Processing directory[/etc/jboss-as] action create (jboss::default line 44)
+[2014-09-14T19:58:09+00:00] INFO: directory[/etc/jboss-as] created directory /etc/jboss-as
+[2014-09-14T19:58:09+00:00] INFO: Processing template[/etc/jboss-as/jboss-as.conf] action create (jboss::default line 46)
+[2014-09-14T19:58:09+00:00] INFO: template[/etc/jboss-as/jboss-as.conf] created file /etc/jboss-as/jboss-as.conf
+[2014-09-14T19:58:10+00:00] INFO: template[/etc/jboss-as/jboss-as.conf] updated file contents /etc/jboss-as/jboss-as.conf
+[2014-09-14T19:58:10+00:00] INFO: template[/etc/jboss-as/jboss-as.conf] owner changed to 0
+[2014-09-14T19:58:10+00:00] INFO: template[/etc/jboss-as/jboss-as.conf] group changed to 0
+[2014-09-14T19:58:10+00:00] INFO: Processing template[/opt/jboss/standalone/configuration/standalone.xml] action create (jboss::default line 56)
+[2014-09-14T19:58:10+00:00] INFO: template[/opt/jboss/standalone/configuration/standalone.xml] backed up to /var/chef/backup/opt/jboss/standalone/configuration/standalone.xml.chef-20140914195810.236199
+[2014-09-14T19:58:10+00:00] INFO: template[/opt/jboss/standalone/configuration/standalone.xml] updated file contents /opt/jboss/standalone/configuration/standalone.xml
+[2014-09-14T19:58:10+00:00] INFO: Processing service[jboss] action enable (jboss::default line 66)
+[2014-09-14T19:58:10+00:00] INFO: service[jboss] enabled
+[2014-09-14T19:58:10+00:00] INFO: Processing service[jboss] action start (jboss::start line 1)
+[2014-09-14T19:58:14+00:00] INFO: service[jboss] started
+[2014-09-14T19:58:14+00:00] INFO: Processing remote_file[/tmp/testweb.zip] action create (jboss::deploy line 10)
+[2014-09-14T19:58:14+00:00] INFO: remote_file[/tmp/testweb.zip] created file /tmp/testweb.zip
+[2014-09-14T19:58:15+00:00] INFO: remote_file[/tmp/testweb.zip] updated file contents /tmp/testweb.zip
+[2014-09-14T19:58:15+00:00] INFO: remote_file[/tmp/testweb.zip] owner changed to 501
+[2014-09-14T19:58:15+00:00] INFO: remote_file[/tmp/testweb.zip] group changed to 501
+[2014-09-14T19:58:15+00:00] INFO: Processing execute[unzip] action run (jboss::deploy line 16)
+[2014-09-14T19:58:15+00:00] INFO: execute[unzip] ran successfully
+[2014-09-14T19:58:15+00:00] INFO: execute[unzip] not queuing delayed action restart on service[jboss] (delayed), as it's already been queued
+[2014-09-14T19:58:15+00:00] INFO: execute[unzip] sending restart action to service[jboss] (delayed)
+[2014-09-14T19:58:15+00:00] INFO: Processing service[jboss] action restart (jboss::start line 1)
+[2014-09-14T19:58:20+00:00] INFO: service[jboss] restarted
+[2014-09-14T19:58:20+00:00] INFO: Chef Run complete in 65.001856165 seconds
+[2014-09-14T19:58:20+00:00] INFO: Running report handlers
+[2014-09-14T19:58:20+00:00] INFO: Report handlers complete
