@@ -19,7 +19,7 @@ else
 end
 
 # port
-default['mysql']['port'] = '3306'
+default['mysql']['port'] = '#{node[:mysql_port]}'
 
 # server package version and action
 default['mysql']['server_package_version'] = nil
