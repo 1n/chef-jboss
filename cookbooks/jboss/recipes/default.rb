@@ -57,10 +57,9 @@ template "#{node['jboss']['jboss_home_link']}/standalone/configuration/standalon
 	source "standalone.xml.erb"
 	owner "#{node['jboss']['jboss_user']}"
 	group "#{node['jboss']['jboss_user']}"
-	variables({
+	variables(
 	  :jboss_ip => node[:network][:interfaces][:eth1][:addresses].detect{|k,v| v[:family] == "inet" }.first
-     #:jboss_ip => node['jboss']['public_ip']
-     })
+     )
 end
 
 service "jboss" do
