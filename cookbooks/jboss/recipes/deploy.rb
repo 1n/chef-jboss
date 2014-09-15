@@ -31,12 +31,3 @@ template "#{node['jboss']['deployment_dir']}/hudson/#{file_name}" do
 	group "#{node['jboss']['jboss_user']}"
 	notifies :restart, "service[jboss]"
 end
-
-=begin
-cookbook_file "hudson.xml" do
-	path "#{node['jboss']['deployment_dir']}/hudson/hudson.xml"
-	owner "#{node['jboss']['jboss_user']}"
-	group "#{node['jboss']['jboss_user']}"
-	notifies :restart, "service[jboss]"
-end
-=end
