@@ -5,7 +5,14 @@ action :install_server do
 end
 
 action :setup_web_server do
-  #
+  template "#{node[:apache][:conf]}" do
+	source "httpd.conf.erb"
+	cookbook "web_apache"
+	variables(
+	  :port => node[:apache][:port],
+	  :interface => node[:apache][:interface]
+     )
+	end
 end
 
 action :start do

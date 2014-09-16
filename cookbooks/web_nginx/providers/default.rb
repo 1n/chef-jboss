@@ -10,7 +10,14 @@ action :install_server do
 end
 
 action :setup_web_server do
-  #
+  template "#{node[:nginx][:conf]}" do
+	source "default.conf.erb"
+	cookbook "web_nginx"
+	variables(
+	  :port => node[:nginx][:port],
+	  :interface => node[:nginx][:interface]
+     )
+	end
 end
 
 action :start do

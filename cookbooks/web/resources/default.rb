@@ -1,4 +1,4 @@
-attribute :server, :kind_of => String
+#attribute :server, :kind_of => String
 
 actions :install_server
 
