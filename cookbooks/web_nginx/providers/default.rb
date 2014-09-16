@@ -4,7 +4,7 @@ action :install_server do
   cookbook_file "nginx.repo" do
   	path "/etc/yum.repos.d/nginx.repo"
     owner "root"
-		 group "root"
+		group "root"
 	end
   package "#{nginx}"
 end
